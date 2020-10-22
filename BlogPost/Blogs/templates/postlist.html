@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ posts.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item">Posts</li>
+        <li class="breadcrumb-item active">{{ posts.title }}</li>
+      </ol>
+    </div>
+  </body>
+</html>
