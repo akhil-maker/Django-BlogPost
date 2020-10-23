@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 from .models import Posts
 from django.shortcuts import render, get_object_or_404, Http404, redirect
 import datetime
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
@@ -18,15 +18,18 @@ def posts(request, id):
     return render(request, 'postlist.html', {'posts': posts})
 
 def add(request, id):
-    if request.method == 'POST':
-        title = request.form.get('title')
-        tagline = request.form.get('tagline')
-        slug = request.form.get('slug')
-        content = request.form.get('content')
-        date = datetime.now()
+    posts = get_object_or_404(Posts, id=id)
+    if request.method == 'POST':       # whatever posted using template will be saved here
+        title = request.POST['title']
+        slug = request.POST['slug']
+        tagline = request.POST['tagline']
+        content = request.POST['content']
 
-        if(id==id+1):
-            post = Posts(title=title, slug=slug, content=content, tagline=tagline, date=date)
-            Posts.add(post)
-            Posts.save()
-    return render(request, 'newtitle.html', {'posts':posts})
+        post = Posts.objects.create(    # Todo-Used to create a new post from post method
+            title = title,
+            slug = slug,
+            tagline = tagline,
+            content = content,
+        )
+        return redirect('/blog')           #redirected with updation of data
+    return render(request, 'newtitle.html', {'posts':posts})          # return object of Posts
