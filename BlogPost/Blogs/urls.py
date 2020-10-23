@@ -4,7 +4,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="Blogs"),
-    #path("addnew/<int:id>/", views.newtitle, name="Edit"),
-    path('add/<int:id>/', views.add, name='Post'),
+    path("", views.index, name="index"),
+    path('add/<int:id>/', views.add, name='add'),
 ]
