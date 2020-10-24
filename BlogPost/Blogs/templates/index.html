@@ -20,6 +20,7 @@
             <th>Tagline</th>
             <th>Content</th>
             <th>Date</th>
+            <td>Options</td>
           </tr>
         </thead>
         <tbody>
@@ -27,17 +28,18 @@
             <tr>
               <td>
                 {{ post.title }}
-                <small class="text-muted d-block"></small>
               </td>
               <td class="align-middle">{{ post.tagline }}</td>
               <td class="align-middle">{{ post.content }}</td>
               <td class="align-middle">{{post.date}}</td>
+              <td class="align-middle"><a href="edit/{{post.id}}" class="btn btn-primary">Edit</a></td>
+              <td class="align-middle"><a href="delete/{{post.id}}" class="btn btn-primary">Delete</a></td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
       <div class="mb-4">
-        <a href="add/1" class="btn btn-primary">New Blog</a>
+        <a href="add/4" class="btn btn-primary">New Blog</a>
       </div>
     </div>
   <!-- Optional JavaScript; choose one of the two! -->
