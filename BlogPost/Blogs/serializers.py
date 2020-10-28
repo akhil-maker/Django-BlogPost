@@ -6,12 +6,13 @@ from .models import Posts, Contact
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ('id', 'title', 'tagline', 'writer', 'content', 'date', 'img')
+        fields = ('user', 'id', 'title', 'tagline', 'writer', 'content', 'date', 'img')
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         field = ('id', 'name', 'phone', 'msg', 'date', 'email')
+
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])

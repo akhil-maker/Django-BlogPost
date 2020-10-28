@@ -1,15 +1,13 @@
-from django.shortcuts import render, HttpResponse
-from django.views.generic import UpdateView, ListView, View
+from django.contrib.auth import authenticate, login
+from django.urls import reverse_lazy
+from rest_framework import permissions
 from .models import Posts
-from django.shortcuts import render, get_object_or_404, Http404, redirect, reverse
-from django.utils import timezone
+from django.views import generic
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import PostsSerializer, UserSerializer
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
 # Create your views here.
 
 class PostListView(generics.ListAPIView):
@@ -22,25 +20,31 @@ class PostDetailView(generics.RetrieveAPIView):
 
 class PostsCreateView(generics.CreateAPIView):
     serializer_class = PostsSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class PostsDeleteView(generics.DestroyAPIView):
     queryset = Posts.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def perform_destroy(self, instance):
+        instance.delete(user=self.request.user)
 
 class PostUpdateView(generics.UpdateAPIView):
-    queryset = Posts.objects.all()
     serializer_class = PostsSerializer
+    queryset = Posts.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
 
-class SignupView(APIView):
-    def post(self, request, format='json'):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def perform_update(self, serializer):
+        current_user = self.request.user
+        user = self.request.user
+        if user:
+            serializer.save(user=self.request.user)
 
 class AuthView(APIView):
     permission_classes = (IsAuthenticated, )
     def get(self, request):
-        content = {'message':'You are authenticated, Save your Token!'}
+        content = {'message': 'You are authenticated, Save your Token!'}
         return Response(status=status.HTTP_200_OK)
