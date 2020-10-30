@@ -79,22 +79,3 @@ class AuthView(APIView):
     def get(self, request):
         content = {'message': 'You are authenticated, Save your Token!'}
         return Response(status=status.HTTP_200_OK)
-
-
-"""
-import smtplib
-
-GMAIL_ID = 'abc@gmail.com'
-GMAIL_PSWD = 'xyz'
-def sendEmail(to, sub, msg):
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls()
-    s.login(GMAIL_ID, GMAIL_PSWD)
-    s.sendmail(GMAIL_ID, to, f"Subject{sub} and {msg}")
-    s.quit()
-
-if __name__ == "__main__":
-    sendEmail(GMAIL_ID, "subject", "Hello")
-    exit()
-    
-"""
