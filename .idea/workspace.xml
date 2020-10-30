@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b16588f-7563-4a7f-ade5-8a7f46372aef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/BlogPost/BlogPost/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlogPost/BlogPost/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlogPost/Blogs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlogPost/Blogs/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

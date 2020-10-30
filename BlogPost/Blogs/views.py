@@ -13,8 +13,8 @@ from .serializers import PostsSerializer, ContactSerializer
 # Create your views here.
 
 class PostListView(generics.ListAPIView):
-    serializer_class = PostsSerializer
     pagination_class = PageNumberPagination
+    serializer_class = PostsSerializer
     queryset = Posts.objects.all()
 
 class PostDetailView(generics.RetrieveAPIView):
@@ -22,8 +22,8 @@ class PostDetailView(generics.RetrieveAPIView):
     serializer_class = PostsSerializer
 
 class ContactListView(generics.ListAPIView):
-    pagination_class = PageNumberPagination
     queryset = Contact.objects.all()
+    pagination_class = PageNumberPagination
     serializer_class = ContactSerializer
 
 class CreateContactView(generics.CreateAPIView):
