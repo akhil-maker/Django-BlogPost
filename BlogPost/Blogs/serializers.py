@@ -11,7 +11,7 @@ class PostsSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        field = ('id', 'name', 'phone', 'msg', 'date', 'email')
+        fields = ('id', 'name', 'phone', 'msg', 'date', 'email')
 
 
 class UserSerializer(serializers.ModelSerializer):

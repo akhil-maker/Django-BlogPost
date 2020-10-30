@@ -8,6 +8,8 @@ from .views import *
 
 urlpatterns = [
     path("create/", views.PostsCreateView.as_view(), name='create'),
+    path('createcontact/', views.CreateContactView.as_view(), name='create_contact'),
+    path('contact/', ContactListView.as_view()),
     path("", PostListView.as_view(), name="index"),
     path("<int:pk>/detail/", PostDetailView.as_view(), name='detail'),
     path('edit/<int:pk>/', PostUpdateView.as_view(), name='edit'),
