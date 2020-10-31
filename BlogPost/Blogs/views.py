@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic import ListView
 from rest_framework import permissions
 from .models import Posts, Contact
 from rest_framework import generics, status
@@ -8,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from .serializers import PostsSerializer, ContactSerializer
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 
 # Create your views here.
@@ -16,6 +16,8 @@ class PostListView(generics.ListAPIView):
     pagination_class = PageNumberPagination
     serializer_class = PostsSerializer
     queryset = Posts.objects.all()
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('title', 'writer', 'date')
 
 class PostDetailView(generics.RetrieveAPIView):
     queryset = Posts.objects.all()
@@ -25,6 +27,8 @@ class ContactListView(generics.ListAPIView):
     queryset = Contact.objects.all()
     pagination_class = PageNumberPagination
     serializer_class = ContactSerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name', 'phone', 'email', 'date')
 
 class CreateContactView(generics.CreateAPIView):
     serializer_class = ContactSerializer
